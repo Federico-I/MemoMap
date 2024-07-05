@@ -1,9 +1,10 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
+import styles from "./NavPage.modules.css";
 
 function NavPage() {
   return (
-    <nav>
+    <nav className={styles.nav}>
         <ul>
             <li>
               <NavLink to="/">Home</NavLink>
