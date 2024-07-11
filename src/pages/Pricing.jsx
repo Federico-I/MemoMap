@@ -1,4 +1,5 @@
 // Uses the same styles as Product
+import React from "react";
 import NavPage from "../Components/NavPage";
 import styles from "./Product.module.css";
 

@@ -1,3 +1,4 @@
+import React from "react";
 import styles from "./City.module.css";
 
 const formatDate = (date) =>
@@ -52,7 +53,7 @@ function City() {
       </div>
 
       <div>
-        <ButtonBack />
+        {/*<ButtonBack />*/}
       </div>
     </div>
   );

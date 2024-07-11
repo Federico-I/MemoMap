@@ -1,3 +1,4 @@
+import React from "react";
 import styles from "./CountryItem.module.css";
 
 function CountryItem({ country }) {

@@ -1,5 +1,4 @@
 import React from 'react'
-import NavApp from '../Components/NavApp';
 import Sidebar from '../Components/Sidebar';
 import styles from "./AppLayout.module.css";
 import Map from '../Components/Map';

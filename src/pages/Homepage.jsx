@@ -1,3 +1,4 @@
+import React from "react";
 import NavPage from "../Components/NavPage";
 import styles from "./Homepage.module.css";
 import { Link } from "react-router-dom";
