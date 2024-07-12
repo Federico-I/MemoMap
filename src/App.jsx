@@ -13,7 +13,7 @@ const ORIGIN_URL = "http://localhost:9000";
 
 function App() {
 
-  const [cities, setCities] = useState({});
+  const [cities, setCities] = useState([]);
   const [loading, setLoading] = useState(false);
 
   useEffect(function() {
