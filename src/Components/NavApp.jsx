@@ -1,10 +1,18 @@
 import React from 'react';
 import styles from "./NavApp.module.css";
+import { NavLink } from 'react-router-dom';
 
 function NavApp() {
   return (
     <div className={styles.nav}>
-        <h1>Naviagation App </h1>
+        <ul>
+          <li>
+            <NavLink to="cities">Cities</NavLink>
+          </li>
+          <li>
+            <NavLink to="countries">Countries</NavLink>
+          </li>
+        </ul>
     </div>
   )
 }
