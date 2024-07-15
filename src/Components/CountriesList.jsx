@@ -12,7 +12,12 @@ function CountryList({ cities, loading }) {
   if(!cities.length)
     return (<Message message="No cities added yet, please select one."/>);
 
-  const countries = [];
+  const countries = cities.reduce((arr, city) => { 
+      if (!arr.map(el => el.city).includes(city.country)) 
+        return [...arr, {country: city.country, emoji: city.emoji}]; 
+      else return arr;
+    
+    }, []);
 
   return (
     <div className={style.countryList}>
