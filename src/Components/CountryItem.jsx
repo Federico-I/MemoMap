@@ -1,11 +1,11 @@
 import React from "react";
 import styles from "./CountryItem.module.css";
 
-function CountryItem({ country }) {
+function CountryItem({ countryData }) {
   return (
     <li className={styles.countryItem}>
-      <span>{country.emoji}</span>
-      <span>{country.country}</span>
+      <span>{countryData.emoji}</span>
+      <span>{countryData.country}</span>
     </li>
   );
 }
