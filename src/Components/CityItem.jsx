@@ -1,29 +1,31 @@
 import React from "react";
-import style from "./CityItem.module.css";
+import styles from "./CityItem.module.css";
 import { Link } from "react-router-dom";
+import { useCities } from "../context/CitiesContext";
 
 const formatDate = (date) =>
-    new Intl.DateTimeFormat("en", {
-      day: "numeric",
-      month: "long",
-      year: "numeric",
-      weekday: "long",
-    }).format(new Date(date));
+  new Intl.DateTimeFormat("en", {
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+    weekday: "long",
+  }).format(new Date(date));
 
 function CityItem({ city }) {
 
-    const {cityName, emoji, date, id, position} = city;
+  const {currentCity} = useCities();
+  const {cityName, emoji, date, id, position} = city;
 
-    return(
-        <li>
-          <Link className={style.CityItem} to={`${id}?lat=${position.lat}&lng${position.lng}`}>
-            <span className={style.emoji}>{emoji}</span>
-            <h3 className={style.name}>{cityName}</h3>
-            <time className={style.date}>{formatDate(date)}</time>
-            <button className={style.delete}>&time;</button>
-          </Link>  
-        </li>
-    );
+  return(
+  <li>
+    <Link className={`${styles.CityItem} ${id === currentCity.id ? styles["cityItem--active"] : "'"}`} to={`${id}?lat=${position.lat}&lng${position.lng}`}>
+      <span className={styles.emoji}>{emoji}</span>
+      <h3 className={styles.name}>{cityName}</h3>
+      <time className={styles.date}>{formatDate(date)}</time>
+      <button className={styles.delete}>&time;</button>
+    </Link>  
+  </li>
+  );
 }
 
 export default CityItem;
