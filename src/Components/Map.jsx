@@ -1,13 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import styles from "./Map.module.css";
 import { useNavigate, useSearchParams } from 'react-router-dom';
-import { MapContainer, useMap } from 'react-leaflet';
+import { MapContainer, useMap, useMapEvent } from 'react-leaflet';
 import { Marker, Popup, TileLayer } from 'leaflet';
 import { useCities } from '../context/CitiesContext';
 
 function Map() {
 
-  const navigate = useNavigate();
   const { cities } =useCities();
 
   const [mapPosition, setMapPosition] = useState([40, 0]);
@@ -39,6 +38,7 @@ function Map() {
           </Marker>
         ))}
         <CenterView position={mapPosition} />
+        <ClickAction />
       </MapContainer>
     </div>
   )
@@ -48,6 +48,14 @@ function CenterView({ position }) {
   const map = useMap();
   map.setView(position);
   return(null);
+};
+
+function ClickAction() {
+  const navigate = useNavigate();
+
+  useMapEvent({
+    click: (e) => navigate(`form?lat=${e.latlng.lat}&lng=${e.latlng.lng}`),
+  });
 };
 
 export default Map;
