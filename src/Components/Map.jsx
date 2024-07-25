@@ -4,15 +4,16 @@ import { useNavigate, useSearchParams } from 'react-router-dom';
 import { MapContainer, useMap, useMapEvent } from 'react-leaflet';
 import { Marker, Popup, TileLayer } from 'leaflet';
 import { useCities } from '../context/CitiesContext';
+import { useGeolocation } from '../hooks/useGeolocation';
+import Button from './Button';
 
 function Map() {
 
   const { cities } =useCities();
-
   const [mapPosition, setMapPosition] = useState([40, 0]);
-
   const [searchParams] = useSearchParams();
-
+  const {isLoading: isLoadingCoords, position: geolocationCoords, getPosition} = useGeolocation();
+ 
   const mapLat = searchParams.get("lat");
   const mapLng = searchParams.get("lng");
 
@@ -24,7 +25,8 @@ function Map() {
   );
 
   return (
-    <div className={styles.mapContainer} onClick={() => navigate("form")}>
+    <div className={styles.mapContainer} >
+      <Button type="position" oncClick={getPosition}>{isLoadingCoords ? "Loadings..." : "use coords of your position"}</Button>
       <MapContainer center={[mapLat, mapLng]} zoom={8} scrollWheelZoom={true} className={styles.map}>
         <TileLayer
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
