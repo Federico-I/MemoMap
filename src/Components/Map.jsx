@@ -24,9 +24,13 @@ function Map() {
     [mapLat, mapLng]
   );
 
+  useEffect( function() {
+    if(geolocationCoords) setMapPosition([geolocationCoords.lat, geolocationCoords.lng]);
+  }, [geolocationCoords]);
+
   return (
     <div className={styles.mapContainer} >
-      <Button type="position" oncClick={getPosition}>{isLoadingCoords ? "Loadings..." : "use coords of your position"}</Button>
+      {!geolocationCoords && (<Button type="position" oncClick={getPosition}>{isLoadingCoords ? "Loadings..." : "use coords of your position"}</Button>)}
       <MapContainer center={[mapLat, mapLng]} zoom={8} scrollWheelZoom={true} className={styles.map}>
         <TileLayer
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
