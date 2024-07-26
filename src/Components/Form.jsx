@@ -61,6 +61,17 @@ function Form() {
 
   function handleSubmit(e) {
     e.preventDefault();
+
+    if(!cityName || !date) return;
+
+    const newCity = {
+      cityName,
+      country,
+      emoji,
+      date,
+      notes,
+      position: { lat, lng}
+    };
   }
 
   if(isLoadingCoords) return <Spinner />;
@@ -73,24 +84,19 @@ function Form() {
     <form className={styles.form} onSubmit={handleSubmit}>
       <div className={styles.row}>
         <label htmlFor="cityName">City name</label>
-        {/* 
          <input
           id="cityName"
           onChange={(e) => setCityName(e.target.value)}
           value={cityName}
         />
-         */}
-        <DatePicker />
+        
         <span className={styles.flag}>{emoji}</span>
       </div>
 
       <div className={styles.row}>
         <label htmlFor="date">When did you go to {cityName}?</label>
-        <input
-          id="date"
-          onChange={(e) => setDate(e.target.value)}
-          value={date}
-        />
+
+        <DatePicker onChange={date => setDate(date)} selected={date} dateFormat="dd/MM/yyyy"/>
       </div>
 
       <div className={styles.row}>
