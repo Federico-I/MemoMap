@@ -8,6 +8,7 @@ import { useURLPosition } from "../hooks/useURLPosition";
 import Message from "./Message";
 import Spinner from "./Spinner";
 import DatePicker from "react-datepicker";
+import { useCities } from "../context/CitiesContext";
 
 const BASE_URL = "https://api.bigdatacloud.net/data/reverse-geocode-client";
 
@@ -22,8 +23,9 @@ export function convertToEmoji(countryCode) {
 function Form() {
 
   const [lat, lng] = useURLPosition();
-  const [isLoadingCoords, setIsLoadingCoords] = useState(false);
+  const { createCity } = useCities();
 
+  const [isLoadingCoords, setIsLoadingCoords] = useState(false);
   const [cityName, setCityName] = useState("");
   const [country, setCountry] = useState("");
   const [date, setDate] = useState(new Date());
@@ -70,8 +72,10 @@ function Form() {
       emoji,
       date,
       notes,
-      position: { lat, lng}
+      position: { lat, lng }
     };
+
+    createCity(newCity);
   }
 
   if(isLoadingCoords) return <Spinner />;
