@@ -1,4 +1,5 @@
-import { createContext, useState, useEffect, useContext } from "react";
+import React from "react"; 
+import { createContext, useContext, useState, useEffect } from "react";
 
 const ORIGIN_URL = "http://localhost:9000";
 
@@ -55,14 +56,30 @@ function CitiesProvider({ children }) {
       setCities((cities) => [...cities, data]);
       setCurrentCity(data);
     } catch (error) {
-      alert("Error loading data...")
+      alert("Error uploading data...")
     } finally {
       setLoading(false)
     }
-};
+  };
+
+  async function deleteCity(id) {
+    try {
+      setLoading(true);
+      await fetch(`${ORIGIN_URL}/cities/${id}`, {
+        method: "DELETE",
+      });
+  
+      // update state with data from API
+      setCities((cities) => cities.filter((city) => city.id === !id));
+    } catch (error) {
+      alert("Error deleting data...")
+    } finally {
+      setLoading(false)
+    };
+  };
 
   return (
-    <CitiesContext.Provider value={{cities, loading, currentCity, getCity, createCity}}>
+    <CitiesContext.Provider value={{cities, loading, currentCity, getCity, createCity, deleteCity}}>
       {children}
     </CitiesContext.Provider>
   )
@@ -72,7 +89,7 @@ function useCities() {
   const context = useContext(CitiesContext);
   if(context === undefined)
     throw new Error("CitiesContext was used outside the CitiesProvider");
-  return(context);
+  return context;
 };
 
-export {CitiesProvider, useCities}
+export { CitiesProvider, useCities };
