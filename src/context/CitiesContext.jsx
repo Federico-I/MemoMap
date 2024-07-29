@@ -51,7 +51,8 @@ function CitiesProvider({ children }) {
       });
       const data = await res.json();
 
-      
+      // update state with data from API
+      setCities((cities) => [...cities, data]);
       setCurrentCity(data);
     } catch (error) {
       alert("Error loading data...")
