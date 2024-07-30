@@ -1,22 +1,60 @@
-import React from "react"; 
+import React, { useReducer } from "react"; 
 import { createContext, useContext, useState, useEffect } from "react";
 
 const ORIGIN_URL = "http://localhost:9000";
 
-const CitiesContext = createContext(); 
+const CitiesContext = createContext();
+
+const initialState = {
+  cities: [],
+  laoding: false,
+  currentCity: {},
+}
+
+function reducer( state, action ) {
+  switch(action.type) {
+
+    case "loading": 
+      return {
+        ...state,
+        loading: false,
+      }
+
+    case "cities/loaded":
+      return {
+       ...state,
+       loading: false,
+       cities: action.payload, 
+      };
+
+    case "cities/created":
+
+    case "cities/deleted":
+
+    default:
+      throw new Error("Unknown action type");
+  }
+}
 
 function CitiesProvider({ children }) {
-  const [cities, setCities] = useState([]);
-  const [loading, setLoading] = useState(false);
-  const [currentCity, setCurrentCity] = useState({});
+  const [{ cities, loading, currentCity }, dispatch] = useReducer( reducer, initialState);
+
+  {/*
+    const [cities, setCities] = useState[];
+    const [loading, setLoading] = useState(false);
+    const [currentCity, setCurrentCity] = useState({});  
+  */}
+
 
   useEffect(function() {
     async function fetchCitiesData() {
+      dispatch({ type: "loading" });
+
       try {
-        setLoading(true);
+        
         const res = await fetch(`${ORIGIN_URL}/cities`);
         const data = await res.json();
-        setCities(data);
+        dispatch({ type: "cities/loading", payload:data });
       } catch (error) {
         alert("Error loading data...")
       } finally {
@@ -70,7 +108,7 @@ function CitiesProvider({ children }) {
       });
   
       // update state with data from API
-      setCities((cities) => cities.filter((city) => city.id === !id));
+      setCities((cities) => cities.filter((city) => city.id !== id));
     } catch (error) {
       alert("Error deleting data...")
     } finally {
