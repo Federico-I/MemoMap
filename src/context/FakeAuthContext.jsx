@@ -18,16 +18,28 @@ function reducer(state, action) {
   };
 }
 
+const FAKE_USER = {
+  name: "Jack",
+  email: "jack@example.com",
+  password: "qwerty",
+  avatar: "https://i.pravatar.cc/100?u=zz",
+};
 
 function AuthProvider({ children }) {
-  const [{ user, isAuthenticated, dispatch }] = useReducer( reducer, initialState);
+  const [{ user, isAuthenticated }, dispatch] = useReducer( reducer, initialState);
 
-  function logIn( emial, password ) {}
+  function logIn( email, password ) {
+    if(email === FAKE_USER.email && password === FAKE_USER.password) {
+      dispatch({ type: "login", payload: FAKE_USER });
+    };
+  }
 
-  function logOut() {}
+  function logOut() {
+    dispatch({ type: "logout" })
+  }
 
   return (
-    <AuthContext.Provider>{children}</AuthContext.Provider>
+    <AuthContext.Provider value={{ user, isAuthenticated, logIn, logOut, dispatch }}>{children}</AuthContext.Provider>
   )
 };
 
@@ -38,3 +50,4 @@ function useAuth() {
     throw new Error("AuthContext was used outside AutgProvider");
 }
 
+export { AuthProvider, useAuth };
