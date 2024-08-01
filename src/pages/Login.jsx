@@ -1,21 +1,29 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
 import styles from "./Login.module.css";
 import NavPage from "../Components/NavPage";
 import { useAuth } from "../context/FakeAuthContext";
 import Button from "../Components/Button";
+import { useNavigate } from "react-router-dom";
 
 export default function Login() {
   // PRE-FILL FOR DEV PURPOSES
   const [email, setEmail] = useState("jack@example.com");
   const [password, setPassword] = useState("qwerty");
-  const { logIn, logOut } = useAuth();
+  const { logIn, logOut, isAuthenticated } = useAuth();
+  const navigate = useNavigate();
 
   function handleSubmit(e){
     e.preventDefault();
 
-    if (email && password) logIn();
-  }
+    if (email && password) logIn( email, password);
+  };
+
+  useEffect( function() {
+
+    if(isAuthenticated) navigate("/app");
+
+  }, [isAuthenticated, navigate]);
 
   return (
     <main className={styles.login}>
