@@ -2,6 +2,7 @@ import React from 'react'
 import Sidebar from '../Components/Sidebar';
 import styles from "./AppLayout.module.css";
 import Map from '../Components/Map';
+import User from '../Components/User';
 
 
  function AppLayout() {
@@ -10,6 +11,7 @@ import Map from '../Components/Map';
     <div className={styles.app}>
         <Sidebar />
         <Map />
+        <User />
     </div>
   )
 }
