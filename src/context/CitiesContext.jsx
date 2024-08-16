@@ -65,12 +65,10 @@ function reducer( state, action ) {
 
 function CitiesProvider({ children }) {
   const [{ cities, loading, currentCity, error }, dispatch] = useReducer( reducer, initialState);
-
   
    // const [cities, setCities] = useState[];
    // const [loading, setLoading] = useState(false);
    // const [currentCity, setCurrentCity] = useState({}); 
-
 
   useEffect(function() {
     async function fetchCitiesData() {
