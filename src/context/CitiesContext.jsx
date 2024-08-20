@@ -1,7 +1,7 @@
 import React, { useCallback, useReducer } from "react"; 
 import { createContext, useContext, useEffect } from "react";
 
-const ORIGIN_URL = "http://localhost:9000";
+const ORIGIN_URL = "http://localhost:3000";
 
 const CitiesContext = createContext();
 
