@@ -13,8 +13,8 @@ const initialState = {
 };
 
 function reducer( state, action ) {
-  switch(action.type) {
 
+  switch(action.type) {
     case "loading": 
       return {
         ...state,
@@ -87,8 +87,8 @@ function CitiesProvider({ children }) {
   }, []);
 
   const getCity = useCallback(
-    async function getCity(id) {
 
+    async function getCity(id) {
         if(Number(id) === currentCity.id) return; 
 
         dispatch({ type: "loading" });
