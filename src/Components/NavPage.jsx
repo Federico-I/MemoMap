@@ -1,6 +1,6 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import styles from "./NavPage.modules.css";
+import styles from "./NavPage.module.css";
 import Logo from './Logo';
 
 function NavPage() {

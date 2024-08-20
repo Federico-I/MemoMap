@@ -1,5 +1,5 @@
 import React from 'react';
-import style from "CountryList.module.css";
+import style from "./CountryList.module.css";
 import Spinner from './Spinner';
 import CountryItem from './CountryItem';
 import Message from './Message';
@@ -8,11 +8,11 @@ import { useCities } from '../context/CitiesContext';
 function CountryList() {
   const {cities, loading} = useCities();
 
-  if(loading) 
-    return (<Spinner />);
+  if( loading ) 
+    return ( <Spinner /> );
   
   if(!cities.length)
-    return (<Message message="No cities added yet, please select one."/>);
+    return ( <Message message="No cities added yet, please select one."/> );
 
   const countries = cities.reduce((arr, city) => { 
       if (!arr.map(el => el.city).includes(city.country)) 
