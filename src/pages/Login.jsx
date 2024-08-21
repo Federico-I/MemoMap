@@ -6,7 +6,7 @@ import { useAuth } from "../context/FakeAuthContext";
 import Button from "../Components/Button";
 import { useNavigate } from "react-router-dom";
 
-export default function Login() {
+function Login() {
   // PRE-FILL FOR DEV PURPOSES
   const [email, setEmail] = useState("jack@example.com");
   const [password, setPassword] = useState("qwerty");
@@ -57,3 +57,5 @@ export default function Login() {
     </main>
   );
 }
+
+export default Login;

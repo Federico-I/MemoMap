@@ -6,7 +6,6 @@ import Message from './Message';
 import { useCities } from '../context/CitiesContext';
 
 function CityList() {
-  
   const {cities, loading} = useCities();
 
   if(loading) 

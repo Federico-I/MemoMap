@@ -64,7 +64,7 @@ function reducer( state, action ) {
 }
 
 function CitiesProvider({ children }) {
-  const [{ cities, loading, currentCity, error }, dispatch] = useReducer( reducer, initialState);
+  const [{ cities, loading, currentCity, error }, dispatch] = useReducer( reducer, initialState );
   
    // const [cities, setCities] = useState[];
    // const [loading, setLoading] = useState(false);
@@ -77,7 +77,7 @@ function CitiesProvider({ children }) {
       try {
         const res = await fetch(`${ORIGIN_URL}/cities`);
         const data = await res.json();
-        dispatch({ type: "cities/loading", payload:data });
+        dispatch({ type: "cities/loaded", payload: data });
       } catch (error) {
         dispatch({ type: "rejected", payload: "Error loading data..." })
       }
