@@ -15,9 +15,9 @@ function CityList() {
     return (< Message message="No cities added yet, please select one." />);
 
   return (
-    <div className={style.cityList}>
-      {cities.map((city) => <CityItem cityData={city.data} key={city.id}/>)}
-    </div>
+    <ul className={style.cityList}>
+      {cities.map((city) => (<CityItem cityData={city} key={city.id}/>))}
+    </ul>
   );
 }
 

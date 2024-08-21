@@ -11,10 +11,10 @@ const formatDate = (date) =>
     weekday: "long",
   }).format(new Date(date));
 
-function CityItem({ city }) {
+function CityItem({ cityData }) {
 
   const {currentCity, deleteCity} = useCities();
-  const {cityName, emoji, date, id, position} = city;
+  const {cityName, emoji, date, id, position} = cityData;
 
   function handleDelete(e) {
     e.preventDefault();
@@ -23,7 +23,7 @@ function CityItem({ city }) {
 
   return(
   <li>
-    <Link className={`${styles.CityItem} ${id === currentCity.id ? styles["cityItem--active"] : "'"}`} to={`${id}?lat=${position.lat}&lng${position.lng}`}>
+    <Link className={`${styles.CityItem} ${id === currentCity.id ? styles["cityItem--active"] : ""}`} to={`${id}?lat=${position.lat}&lng=${position.lng}`}>
       <span className={styles.emoji}>{emoji}</span>
       <h3 className={styles.name}>{cityName}</h3>
       <time className={styles.date}>{formatDate(date)}</time>
