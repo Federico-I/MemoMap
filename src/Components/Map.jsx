@@ -10,7 +10,7 @@ import { useURLPosition } from '../hooks/useURLPosition';
 
 function Map() {
 
-  const { cities } =useCities();
+  const { cities } = useCities();
   const [mapPosition, setMapPosition] = useState([40, 0]);
   const {isLoading: isLoadingCoords, position: geolocationCoords, getPosition} = useGeolocation();
   const [mapLat, mapLng] = useURLPosition();
@@ -23,13 +23,16 @@ function Map() {
     [mapLat, mapLng]
   );
 
-  useEffect( function() {
-    if(geolocationCoords) setMapPosition([geolocationCoords.lat, geolocationCoords.lng]);
+  useEffect( 
+    function() {
+      if(geolocationCoords) setMapPosition([geolocationCoords.lat, geolocationCoords.lng]);
   }, [geolocationCoords]);
 
   return (
     <div className={styles.mapContainer} >
-      {!geolocationCoords && (<Button type="position" oncClick={getPosition}>{isLoadingCoords ? "Loadings..." : "use coords of your position"}</Button>)}
+      { !geolocationCoords && (
+        <Button type="position" oncClick={getPosition}>{isLoadingCoords ? "Loadings..." : "use coords of your position"}</Button>
+        )}
       <MapContainer center={mapPosition} zoom={6} scrollWheelZoom={true} className={styles.map}>
         <TileLayer
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
@@ -53,7 +56,7 @@ function Map() {
 function CenterView({ position }) {
   const map = useMap();
   map.setView(position);
-  return(null);
+  return null;
 };
 
 function ClickAction() {

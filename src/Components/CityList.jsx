@@ -12,7 +12,7 @@ function CityList() {
     return (<Spinner />);
   
   if(!cities.length)
-    return (< Message message="No cities added yet, please select one." />);
+    return (< Message message="Please select a city to start your journey!" />);
 
   return (
     <ul className={style.cityList}>
